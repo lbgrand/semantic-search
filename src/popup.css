@@ -1,0 +1,459 @@
+/* md-style.css
+   Material-style CSS for a Chrome extension UI
+   Primary: Indigo, Secondary: Teal (Material palette)
+   Drop into your extension and adjust variables under :root as needed.
+*/
+
+/* Roboto (Material recommended font) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+  /* Primary (Indigo) tones */
+  --md-primary-50:  #E8EAF6;
+  --md-primary-100: #C5CAE9;
+  --md-primary-200: #9FA8DA;
+  --md-primary-300: #7986CB;
+  --md-primary-400: #5C6BC0;
+  --md-primary-500: #3F51B5; /* primary main */
+  --md-primary-600: #3949AB;
+  --md-primary-700: #303F9F;
+  --md-primary-800: #283593;
+  --md-primary-900: #1A237E;
+
+  /* Secondary (Teal) tones */
+  --md-secondary-50:  #E0F2F1;
+  --md-secondary-100: #B2DFDB;
+  --md-secondary-200: #80CBC4;
+  --md-secondary-300: #4DB6AC;
+  --md-secondary-400: #26A69A;
+  --md-secondary-500: #009688; /* secondary main */
+  --md-secondary-600: #00897B;
+  --md-secondary-700: #00796B;
+  --md-secondary-800: #00695C;
+  --md-secondary-900: #004D40;
+
+  /* App-level color usage */
+  --color-primary: var(--md-primary-500);
+  --color-primary-variant: var(--md-primary-700);
+  --color-secondary: var(--md-secondary-500);
+  --color-surface: #FFFFFF;
+  --color-background: var(--md-primary-50);
+  --color-on-primary: #FFFFFF;
+  --color-on-surface: rgba(0,0,0,0.87);
+  --color-on-surface-muted: rgba(0,0,0,0.6);
+  --color-disabled: rgba(0,0,0,0.38);
+  --color-error: #B00020;
+
+  /* Spacing / sizing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Elevation shadows (Material-like) */
+  --elevation-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  --elevation-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  --elevation-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+  /* Typography scale */
+  --font-family: 'Roboto', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Animation */
+  --transition-fast: 150ms cubic-bezier(.4,0,.2,1);
+  --transition-medium: 240ms cubic-bezier(.4,0,.2,1);
+}
+
+/* Base reset for extension panel */
+html, body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-on-surface);
+  background: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    width: 300px;
+}
+
+/* Container */
+.md-container {
+  padding: var(--space-lg);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  min-width: 320px;
+  max-width: 720px;
+}
+
+/* Panels - consistent card style */
+.md-panel {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-1);
+  padding: var(--space-md);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+  display: block;
+}
+
+.md-panel:hover {
+  box-shadow: var(--elevation-2);
+  transform: translateY(-2px);
+}
+
+/* Status panel (e.g. connection / status indicators) */
+.md-status {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03);
+}
+
+/* Status indicator dots */
+.md-status__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.md-status__dot--ok { background: var(--color-secondary); }
+.md-status__dot--warn { background: #FFB300; } /* amber-ish */
+.md-status__dot--error { background: var(--color-error); }
+
+/* Typography helpers */
+.h1 { font-size: 1.125rem; font-weight: var(--font-weight-medium); margin: 0; }
+.h2 { font-size: 1rem; font-weight: var(--font-weight-medium); margin: 0; color: var(--color-on-surface-muted); }
+
+/* Search input (styled Material-like) */
+#search-container {
+  display: none;
+}
+
+.md-search-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.md-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background: var(--color-surface);
+  border-radius: 999px;
+  box-shadow: var(--elevation-1);
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.md-search .md-search__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  color: var(--color-on-surface-muted);
+  font-size: 18px;
+}
+
+/* input field itself */
+.md-search input[type="search"],
+.md-search input[type="text"] {
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  color: var(--color-on-surface);
+  background: transparent;
+  padding: 12px 8px;
+  flex: 1 1 auto;
+}
+
+/* clear button on the right */
+.md-search .md-search__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--color-on-surface-muted);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.md-search .md-search__clear:hover { background: rgba(0,0,0,0.04); color: var(--color-on-surface); }
+
+/* Fancy focus ring for accessibility */
+.md-search:focus-within {
+  border-radius: 999px;
+  box-shadow: 0 0 0 3px rgba(63,81,181,0.12), var(--elevation-2);
+}
+
+.info-container {
+  display: none;
+  position: absolute;
+  left: -200px;
+  top: 30px;
+  min-width: 200px;
+  color: var(--color-on-surface);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-md);
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.98));
+  box-shadow: var(--elevation-1);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  border: 1px solid rgba(0,0,0,0.03);
+  font-weight: var(--font-weight-regular);
+}
+
+.info-container p {
+  margin: var(--space-md) 0;
+}
+
+/* Buttons */
+#info-btn {
+  position: relative;
+  margin-left: 10px;
+  padding: 5px 11px;
+  background-color: var(--color-secondary);
+}
+
+#info-btn:hover .info-container {
+  display: block;
+}
+
+.md-btn {
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  padding: 8px;
+  border-radius: 999px;
+  /* display: inline-flex; */
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  border: none;
+  text-decoration: none;
+  user-select: none;
+  -webkit-appearance: none;
+  vertical-align: middle;
+}
+
+/* Primary contained button */
+.md-btn--primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  box-shadow: var(--elevation-1);
+  font-weight: var(--font-weight-medium);
+}
+.md-btn--primary:hover {
+  background: var(--color-primary-variant);
+  box-shadow: var(--elevation-2);
+  transform: translateY(-1px);
+}
+.md-btn--primary:active { transform: translateY(0); }
+
+/* Outlined button */
+.md-btn--outlined {
+  border: 1px solid rgba(0,0,0,0.12);
+  background: transparent;
+  color: var(--color-on-surface);
+}
+.md-btn--outlined:hover { box-shadow: var(--elevation-1); }
+
+/* Text button */
+.md-btn--text {
+  background: transparent;
+  color: var(--color-primary);
+  padding: 8px;
+}
+
+/* Disabled state */
+.md-btn[disabled], .md-btn--disabled {
+  opacity: 0.42;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* Ripple-like feedback (pure CSS approximation) */
+.md-btn::after, .md-search .md-search__clear::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0.12;
+  transition: transform 320ms cubic-bezier(.4,0,.2,1), opacity 320ms cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+}
+.md-btn:active::after {
+  transform: scale(2.2);
+  opacity: 0;
+}
+
+/* Results list + result card */
+.md-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.md-result-card {
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.98));
+  box-shadow: var(--elevation-1);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+.md-result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-2);
+}
+
+/* Avatar / icon in result */
+.md-result-card__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--md-primary-100);
+  color: var(--md-primary-700);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Result text */
+.md-result-card__title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-lg);
+  margin: 0;
+  color: var(--color-on-surface);
+}
+.md-result-card__subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-on-surface-muted);
+}
+
+/* Chips & badges */
+.md-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  background: rgba(0,0,0,0.04);
+  color: var(--color-on-surface);
+}
+.md-badge {
+  display: inline-flex;
+  min-width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  margin-right: 8px;
+  font-size: 12px;
+  border-radius: 10px;
+  background: var(--color-secondary);
+  color: var(--color-on-primary);
+}
+
+#search-options {
+  display: none;
+  margin-bottom: var(--space-md);
+}
+
+#result-length {
+  margin-left: 10px;
+}
+
+.md-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 7px;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  color: var(--color-on-surface);
+  background: var(--color-surface);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-1);
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast),
+              background var(--transition-fast);
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' stroke='rgba(0,0,0,0.54)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  background-size: 18px;
+  padding-right: 25px;
+}
+
+/* Hover and focus states */
+.md-select:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--elevation-2);
+}
+
+.md-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(63,81,181,0.12), var(--elevation-2);
+}
+
+/* Utility helpers */
+.row { display: flex; align-items: center; gap: var(--space-md); }
+.col { display: flex; flex-direction: column; gap: var(--space-sm); }
+.right { margin-left: auto; }
+.center { justify-content: center; align-items: center; }
+
+/* Accessibility: visible focus for keyboard users */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  box-shadow: 0 0 0 3px rgba(0,150,136,0.18);
+  border-radius: 6px;
+}
+
+/* Example utility to flip to dark variant (optional) */
+.md-theme--dark {
+  --color-surface: #121212;
+  --color-background: #0f0f0f;
+  --color-on-surface: rgba(255,255,255,0.92);
+  --color-on-surface-muted: rgba(255,255,255,0.70);
+  --color-disabled: rgba(255,255,255,0.3);
+  background: var(--color-background);
+}
+
+/* End of md-style.css */
+

@@ -1,0 +1,41 @@
+{
+  "name": "Semantische Suche",
+  "description": "Suche nach Informationen auf der Seite mit Hilfe von AI-unterstützter semantischer Suche.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-100.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "web_accessible_resources": [{
+    "matches": ["<all_urls>"],
+    "resources": [
+      "scripts/*"
+    ]
+  }],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'"
+  }
+}

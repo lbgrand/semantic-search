@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <div class="md-status">
+      <span id="model-status">KI Modell ist nicht geladen<span>
+    </div>
+    <div class="md-status">
+      <span id="indexing-status">Seite ist nicht indexiert</span>
+    </div>
+    
+    <div class="md-search-container" id="search-container">
+      <input type="text" id="query-input" class="md-search" />
+      <button id="query-button" class="md-btn md-btn--primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-magnifying-glass"><circle cx="7" cy="7" r="5"></circle><line x1="13" y1="13" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div id="search-options">
+      <!-- <label for="result-number">Number of results</label> -->
+      <select id="result-number" class="md-select">
+        <option value="10">10 Ergebnisse</option>
+        <option value="25">25 Ergebnisse</option>
+        <option value="50">50 Ergebnisse</option>
+        <option value="100">100 Ergebnisse</option>
+        <option value="all">Alle Ergebnisse</option>
+      </select>
+      <select id="result-length" class="md-select">
+        <option value="100">100 Zeichen</option>
+        <option value="250">250 Zeichen</option>
+        <option value="500">500 Zeichen</option>
+        <option value="all">Alle Zeichen</option>
+      </select>
+      
+      <div class="md-btn md-btn--primary" id="info-btn">
+        ?
+        <div class="info-container">
+          <p>Für einfache Suche gibt man die Suchbegriffe ein und clickt dann auf den Suchknopf oder druckt die Enter-Taste.</p>
+          <p>Die Anzahl der Suchergebnisse wird im linken Menü unter dem Suchfeld eingestellt.</p>
+          <p>Die Zeichenanzahl jedes Ergebnisses, die angezeigt wird, ist ebenfalls anpassbar (im rechten Menü).</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="results" class="md-results"></div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
