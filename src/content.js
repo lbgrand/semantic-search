@@ -11,7 +11,6 @@ async function indexPage() {
 
   for (let i = 0; i < paragraphs.length; i++) {
     const paragraph = paragraphs[i];
-    console.log(`content.js - Starting indexing paragraph: `, paragraph);
     if (!paragraph.textContent.trim()) continue;
 
     const message = {
@@ -31,9 +30,7 @@ async function indexPage() {
 }
 
 async function clearIndex() {
-  const result = await chrome.runtime.sendMessage({ action: 'clear-index' });
-  console.log(`content.js - Cleared index: `, result);
-  return result;
+  return await chrome.runtime.sendMessage({ action: 'clear-index' });
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

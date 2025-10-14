@@ -1,4 +1,4 @@
-// popup.js - the UI scripts running each time the popup is opened. When popup is closed script context is destroyed.
+// popup.js - the UI scripts running each time the sidepanel is opened. When sidepanel is closed script context is destroyed.
 const IndexingStatus = Object.freeze({
   NOT_LOADED: Symbol('NOT_LOADED'),
   LOADING: Symbol('LOADING'),
@@ -122,6 +122,10 @@ async function isIndexingDone() {
     return IndexingStatus.LOADED;
   }
 }
+
+chrome.tabs.onActivated.addListener(async (tabId, info, tab) => {
+  isIndexingDone();
+});
 
 async function init() {
   while (!(await isModelLoaded())) {}

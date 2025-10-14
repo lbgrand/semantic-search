@@ -1,17 +1,22 @@
 {
   "name": "Semantische Suche",
   "description": "Suche nach Informationen auf der Seite mit Hilfe von AI-unterstützter semantischer Suche.",
-  "version": "1.0",
+  "version": "0.0.1",
   "manifest_version": 3,
   "permissions": [
     "activeTab",
     "scripting",
     "contextMenus",
     "storage",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "tabs",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_title": "Click to open extension"
   },
   "icons": {
     "16": "icons/icon-16.png",

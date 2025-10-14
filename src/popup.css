@@ -82,10 +82,6 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-    width: 300px;
-}
-
 /* Container */
 .md-container {
   padding: var(--space-lg);

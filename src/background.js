@@ -53,16 +53,12 @@ class PipelineSingleton {
 }
 
 const embed = async (text) => {
-    // Get the pipeline instance. This will load and build the model when run for the first time.
     let model = await PipelineSingleton.getInstance(PipelineSingleton.trackModelLoadingProgress);
-
-    // Actually run the model on the input
     return await model(text, { pooling: 'mean', normalize: true });
 };
 
 // Listen for messages from the UI, process it, and send results back.
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    // console.log('background.js: message received: ', message);
     if (message.action == 'clear-index') {
       PipelineSingleton.embeddingsMap.clear();
       PipelineSingleton.indexedPageUrl = null;
@@ -75,29 +71,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
 
     if (message.action == 'index') {
-      // Run model prediction asynchronously
       (async function () {
-        // Perform embedding
-        console.log(`background.js - Got text to index: `, message);
         let result = await embed(message.text);
         PipelineSingleton.embeddingsMap.set(result.data, message.text);
-
-        // Send response back to UI
-        console.log(`background.js - Indexed text: `, result);
         sendResponse(result);
       })();
     }
     
     if (message.action == 'query') {
-      // Run model prediction asynchronously
       (async function () {
-        // Perform embedding
         let result = await embed(message.text);
         let similarityScores = [];
         for (let [embedding, text] of PipelineSingleton.embeddingsMap.entries()) {
           let score = cos_sim(result.data, embedding);
-          let insertIndex = similarityScores.findIndex(item => item.score < score);
-          insertIndex === -1 ? similarityScores.push({score, text}) : similarityScores.splice(insertIndex, 0, {score, text});
+          similarityScores.push({ text, score });
         }
         similarityScores.sort((a, b) => b.score - a.score);
         sendResponse(similarityScores);
@@ -107,6 +94,28 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // return true to indicate we will send a response asynchronously
     return true;
 });
+
+chrome.sidePanel
+  .setPanelBehavior({ openPanelOnActionClick: true })
+  .catch((error) => console.error(error));
+
+chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
+  if (!tab.url) return;
+  await chrome.sidePanel.setOptions({
+      tabId,
+      path: 'popup.html',
+      enabled: true
+    });
+});
+
+const reloadTabs = async () => {
+  const tabs = await chrome.tabs.query({});
+  for (const tab of tabs) {
+    if (!tab.url) return;
+    await chrome.tabs.reload(tab.id);
+  }
+};
+reloadTabs();
 
 const keepAlive = () => setInterval(chrome.runtime.getPlatformInfo, 20e3);
 chrome.runtime.onStartup.addListener(keepAlive);
