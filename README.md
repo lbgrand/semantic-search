@@ -41,8 +41,6 @@ Gehe dazu wie folgt vor:
 Die Erweiterung erscheint anschließend in der Liste und ist einsatzbereit.
 Öffne eine beliebige Webseite und klicke auf das Eulen-Symbol 🦉, um das Seitenpanel der Erweiterung zu öffnen.
 
-===
-
 English version
 
 # 🦉 Semantic Search
