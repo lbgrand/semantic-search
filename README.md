@@ -1,4 +1,4 @@
-Deusche Version (English version down below)
+Deutsche Version (English version down below)
 
 # 🦉 Semantische Suche
 
