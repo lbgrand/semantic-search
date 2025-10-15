@@ -1,6 +1,8 @@
+![Semantic Search Owl](public/icons/icon-100.png)
+
 Deutsche Version (English version down below)
 
-# 🦉 Semantische Suche
+# Semantische Suche
 
 Eine **Chrome-Erweiterung**, mit der du Inhalte auf Webseiten mithilfe **natürlicher Sprache** semantisch durchsuchen kannst.
 
@@ -39,11 +41,11 @@ Gehe dazu wie folgt vor:
 * Wähle den Build-Ordner aus.
 
 Die Erweiterung erscheint anschließend in der Liste und ist einsatzbereit.
-Öffne eine beliebige Webseite und klicke auf das Eulen-Symbol 🦉, um das Seitenpanel der Erweiterung zu öffnen.
+Öffne eine beliebige Webseite und klicke auf das Eulen-Symbol, um das Seitenpanel der Erweiterung zu öffnen.
 
 English version
 
-# 🦉 Semantic Search
+# Semantic Search
 Chrome extension which allows you to sematically search content on web pages using natural language queries. Under the hood, embeddings ML model is used to enable semantic similarity search between embedding vectors. Full processing is happening in
 your browser locally, and not sent anywhere. So it's safe to run on a privte/proprietary webpages as well.
 
